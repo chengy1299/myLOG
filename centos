@@ -1,0 +1,9 @@
+centos7最小化系统安装设置IP(ifconfig找不到)
+1.然后输入命令查看本机是否分配IP,执行命令ip addr ，可以发现系统的网卡没有分配IP地址，在此我们需要记住本机网卡的名称，用于下一步使用
+2.然后我们进入网卡配置文件的目录。执行命令 cd /etc/sysconfig/network-scripts/ 然后查看下面的网卡文件。
+3.然后我们找到对应的网卡文件执行命令 vi ifcfg-eno16777736。进行修改网卡文件，不同机器网卡不同
+4.我们需要首先找到ONBOOT=no ，需要修改为ONBOOT=yes然后保存退出。
+5.然后执行命令 service network restart 重启网卡服务
+6.执行完成后，我们再次执行命令 ip addr 查看是否分配到IP地址，可以看到已经分配到IP地址。
+7.然后我们执行命令yum provides ifconfig 查看哪个包提供了ifconfig命令，然后可以看到net-tools包提供ifconfig包
+8.然后我们执行命令安装net-tools包，执行命令：yum install net-tools。具体操作如下图所示。然后我们执行命令ifconfig，可以看到可以使用了，而且展示了系统的网卡信息
